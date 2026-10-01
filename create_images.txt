@@ -1,0 +1,73 @@
+<?php
+// ============================================================
+// QUICK BITE - IMAGE GENERATOR (FULL VERSION)
+// ============================================================
+
+// Define upload path
+$basePath = __DIR__ . '/../uploads/foods/';
+
+// Function to create placeholder image
+function createPlaceholderImage($path, $text, $width = 400, $height = 300, $bgColor = '#FF6B6B') {
+    if (!function_exists('imagecreatetruecolor')) {
+        die("GD Library is not enabled!");
+    }
+    
+    $image = imagecreatetruecolor($width, $height);
+    
+    list($r, $g, $b) = sscanf($bgColor, '#%02x%02x%02x');
+    $bg = imagecolorallocate($image, $r, $g, $b);
+    imagefill($image, 0, 0, $bg);
+    
+    $white = imagecolorallocate($image, 255, 255, 255);
+    $whiteAlpha = imagecolorallocatealpha($image, 255, 255, 255, 50);
+    
+    for ($i = -$height; $i < $width + $height; $i += 30) {
+        imageline($image, $i, 0, $i + $height, $height, $whiteAlpha);
+    }
+    
+    imagefilledellipse($image, $width/2, $height/2 - 20, 100, 100, $whiteAlpha);
+    
+    $textColor = imagecolorallocate($image, 255, 255, 255);
+    $fontSize = 5;
+    $textWidth = imagefontwidth($fontSize) * strlen($text);
+    $x = ($width - $textWidth) / 2;
+    $y = ($height - imagefontheight($fontSize)) / 2 + 10;
+    
+    imagestring($image, $fontSize, $x + 1, $y + 1, $text, imagecolorallocate($image, 0, 0, 0));
+    imagestring($image, $fontSize, $x, $y, $text, $textColor);
+    
+    imagejpeg($image, $path, 90);
+    imagedestroy($image);
+    
+    echo "✅ Created: " . basename($path) . "<br>";
+}
+
+// List of ALL food images needed
+$foodImages = [
+    'food-default.jpg' => 'Food',
+    'chicken-burger.jpg' => 'Chicken Burger',
+    'beef-burger.jpg' => 'Beef Burger',
+    'french-fries.jpg' => 'French Fries',
+    'margherita.jpg' => 'Margherita',
+    'chicken-pizza.jpg' => 'Chicken Pizza',
+    'pepperoni-pizza.jpg' => 'Pepperoni Pizza',
+    'chicken-biryani.jpg' => 'Chicken Biryani',
+    'butter-chicken.jpg' => 'Butter Chicken',
+    'pilau-rice.jpg' => 'Pilau Rice',
+    'grilled-salmon.jpg' => 'Grilled Salmon',
+    'quinoa-salad.jpg' => 'Quinoa Salad',
+    'fresh-juice.jpg' => 'Fresh Juice',
+];
+
+// Generate all food images
+foreach ($foodImages as $filename => $label) {
+    $path = $basePath . $filename;
+    if (!file_exists($path)) {
+        createPlaceholderImage($path, $label);
+    } else {
+        echo "✅ Already exists: " . $filename . "<br>";
+    }
+}
+
+echo "<br>🎉 All food images created successfully!";
+?>

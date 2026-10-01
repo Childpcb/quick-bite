@@ -1,0 +1,93 @@
+# Quick Bite - Food Delivery System
+
+## Project Description
+
+Quick Bite is a complete, dynamic food delivery platform built with PHP and MySQL. It allows customers to browse restaurants, order food, and track their orders in real-time. The system features a complete admin dashboard for managing food items, restaurants, categories, orders, and promotions.
+
+## Features
+
+### Customer Features
+- User registration and login
+- Browse food items and restaurants
+- Search and filter food
+- View food details
+- Add items to shopping cart
+- Manage cart (add, remove, update quantities)
+- Checkout with delivery address selection
+- Multiple payment methods (Cash on Delivery, Mobile Money, Card)
+- Order tracking with status updates
+- View order history
+- Manage profile and saved addresses
+- View active promotions
+- Notifications for order updates
+
+### Admin Features
+- Admin dashboard with statistics
+- Food management (CRUD operations)
+- Restaurant management
+- Category management
+- Order management with status updates
+- Customer management
+- Promotion management
+- Reports and analytics
+
+## Technology Stack
+
+- **Frontend**: HTML5, Tailwind CSS, JavaScript, Font Awesome
+- **Backend**: PHP 8.x
+- **Database**: MySQL
+- **Local Server**: Apache (XAMPP)
+- **Database Management**: phpMyAdmin
+
+## Requirements
+
+- XAMPP (Apache, MySQL, PHP)
+- Web Browser (Chrome, Firefox, Edge, etc.)
+
+## Installation Guide
+
+### 1. Install XAMPP
+
+Download and install XAMPP from https://www.apachefriends.org/
+
+### 2. Start XAMPP Services
+
+1. Open XAMPP Control Panel
+2. Click "Start" for Apache
+3. Click "Start" for MySQL
+
+### 3. Setup Project
+
+1. Copy the `quick-bite` folder to `C:\xampp\htdocs\`
+2. The project path should be: `C:\xampp\htdocs\quick-bite`
+
+### 4. Create Database
+
+1. Open phpMyAdmin: http://localhost/phpmyadmin
+2. Click "New" on the left sidebar
+3. Database name: `quick_bite`
+4. Click "Create"
+
+### 5. Import Database Schema
+
+1. Select the `quick_bite` database
+2. Click the "Import" tab
+3. Choose `database/schema.sql`
+4. Click "Go"
+
+### 6. Import Sample Data (Optional)
+
+1. Select the `quick_bite` database
+2. Click the "Import" tab
+3. Choose `database/seed.sql`
+4. Click "Go"
+
+### 7. Configure Database Connection
+
+Edit `config/database.php` with your database credentials:
+
+```php
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'quick_bite');
+define('DB_USER', 'root');
+define('DB_PASS', '');
